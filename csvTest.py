@@ -3,8 +3,7 @@
 ###
 
 import unittest 
-import sys
-sys.path.append('../src')
+
 from  csv_process import *
 
 class csvUnitTests(unittest.TestCase):
