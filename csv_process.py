@@ -3,27 +3,55 @@
 ###
 
 import csv
-
+from datetime import datetime
+######
 # returns iterable object for CSV data 
 
-def openCSV():
-	with open('../data/violations.csv', 'rb') as csvfile:
+######
+def convertCSV():
+	with open('violations.csv', 'rb') as csvfile:
 		# file_reader = csv.reader(csvfile, delimeter = ',')
 		dialect = csv.Sniffer().sniff(csvfile.read(1024))
 		csvfile.seek(0)
+		outfile  = open('ttest.csv', "wb")
+		writer = csv.writer(outfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
 		file_reader = csv.reader(csvfile, dialect)		
 		for row in file_reader:
-			print row
+			print ">>>>>>>", row
+			convertRow = extractFields(row)
+			# write.writerow(covertRow)
 
+	outfile.close()
 ###
-# Map a Vioation Code to Pre-Set Violation Category
+
+########## extractFields():
+# extractFields(row) 
+# Takes a row of csv data and returns specific fields
+##########
+def extractFields(row):
+	# answer = {'954543_01022014':{'violation_category': 40, 'time': '1030A', 'address':'1777 PITKIN AVE'}}
+	print "Input Row: ", row[0]
+	issuerCode = row[16]
+	date = row[4]	
+	violation_category = row[5]
+	time = row[19]
+	address = row[23] + " " + row[24]
+	# print issuerCode, date , time,  violation_category, address
+	return_row = [issuerCode, date, time, violation_category, address]
+	print "Convert Row: ", return_row
+	return return_row
+
+
+
+###############################
+# Map a Violation Code to Pre-Set Violation Category
 # (1) parking during street cleaning hours, the single most common violation
 # (2) stopping, standing, or parking in illegal areas, or at certain hours; 
 # (3) parking in illegal ways or blocking access or traffic (e.g., double parking, parking the wrong way or at an angle); 
 # (4) parking beyond the time allowed by regulation or by the meter; and 
 # (5) parking without proper registration, documentation, or with damaged license plates, etc.
 # (6) Everything else
-###
+##############################
 def assignCategory(violation_number):
 
 	return 5
@@ -58,7 +86,16 @@ def calculateTimeFromString(time_string):
 			return time_num
 		else:
 			return time_num + 1200
-		
+
+####
+# transformDate(date)
+####			
+def transformDate(datestring):
+	dt = datetime.strptime(datestring, '%Y-%m-%d %H:%M:%S')
+	
+
 if __name__ == '__main__':
-	# openCSV()
-	print calculateTimeFromString('0200P')
+	convertCSV()
+	# print calculateTimeFromString('0200P')
+	# row =	['1358044703', 'FPE1082', 'NY', '999', '01/02/2014', '40', 'SDN', 'ACURA', 'P', '70930', '89970', '82230', '20150612', '0073', '73', '165', '954543', '0165', '0000', '1030A', '', '', 'F', '1777', 'PITKIN AVE', '', '0', '408', 'E2', '', 'BBBBBBB', 'ALL', 'ALL', 'GOLD', '0', '2006', '-', '6', '', '', '', '', '']
+	# extractFields(row)		

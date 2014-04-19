@@ -14,7 +14,20 @@ class csvUnitTests(unittest.TestCase):
 	def test_AssignCategory_ShouldBe5_withViolationCode56(self):
 		
 		self.assertEqual(5, assignCategory(56))
-	
+
+###### Unit Test for extractFields()
+	def test_extractFieldsShouldAnswerfromInput(self):		
+		row =	['1358044703', 'FPE1082', 'NY', '999', '01/02/2014', '40', 'SDN', 'ACURA', 'P', '70930', '89970', '82230', '20150612', '0073', '73', '165', '954543', '0165', '0000', '1030A', '', '', 'F', '1777', 'PITKIN AVE', '', '0', '408', 'E2', '', 'BBBBBBB', 'ALL', 'ALL', 'GOLD', '0', '2006', '-', '6', '', '', '', '', '']
+		answer = ['954543', '01/02/2014','1030A','40',  '1777 PITKIN AVE']		
+		fields = extractFields(row)
+		self.assertEquals(answer, fields)
+
+	def test_extractFieldsShouldAnswer2fromInput2(self):		
+		row =	['1358044703', 'FPE1082', 'NY', '999', '12/22/2014', '45', 'SDN', 'ACURA', 'P', '70930', '89970', '82230', '20150612', '0073', '73', '165', '951234', '0165', '0000', '1230P', '', '', 'F', '1234', 'COLUMBUS AVE', '', '0', '408', 'E2', '', 'BBBBBBB', 'ALL', 'ALL', 'GOLD', '0', '2006', '-', '6', '', '', '', '', '']
+		answer = ['951234', '12/22/2014','1230P','45',  '1234 COLUMBUS AVE']		
+		fields = extractFields(row)
+		self.assertEquals(answer, fields)		
+###### Unit Test for extractFields()
 ###### Unit Test calculateTimeFromString()	
 	def test_CalculateTimefromString_ShouldBe0100from0100A(self):	
 		self.assertEqual(100, calculateTimeFromString('0100A'))
