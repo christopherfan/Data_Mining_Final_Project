@@ -27,8 +27,8 @@ class ClusterDictionary:
 	@staticmethod
 	def createDefaultEntryToClusterDict():
 		entry = collections.OrderedDict()
-		for violation_category in xrange(6):
-			for time_category in xrange(12):
+		for violation_category in xrange(1,7):
+			for time_category in xrange(1,13):
 				entry_key = str(violation_category) +'_'+ str(time_category)
 				# print entry_key
 				entry[entry_key]= 0
@@ -80,8 +80,8 @@ class ClusterDictionary:
 			writer = csv.writer(outfile, delimiter=',')
 			# Create Headers
 			headers =['Issuer_id']
-			for violation_category in xrange(6):
-				for time_category in xrange(12):
+			for violation_category in xrange(1,7):
+				for time_category in xrange(1,13):
 					violation_time_entry = str(violation_category) +'_'+ str(time_category)
 					# print violation_time_entry
 					headers.append(violation_time_entry)
@@ -132,6 +132,7 @@ class ClusterDictionary:
 ########## importCSV(self)
 
 if __name__ == '__main__':
+	# print ClusterDictionary.createDefaultEntryToClusterDict()
 	cluster_results = ClusterDictionary()
-	cluster_results.importCSV('test_input2.csv')
-	cluster_results.exportCSV('test_input2_out.csv')
+	cluster_results.importCSV('tim/violations_top_performers_grouped.csv')
+	cluster_results.exportCSV('ClusterData/cluster_data.csv')
