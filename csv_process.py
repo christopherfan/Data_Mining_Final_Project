@@ -4,25 +4,45 @@
 
 import csv
 from datetime import datetime
+import collections
 ######
 # returns iterable object for CSV data 
 
 ######
 def convertCSV():
-	with open('violations.csv', 'rb') as csvfile:
+	with open('test_input.csv', 'rb') as csvfile:
 		# file_reader = csv.reader(csvfile, delimeter = ',')
 		dialect = csv.Sniffer().sniff(csvfile.read(1024))
 		csvfile.seek(0)
 		outfile  = open('ttest.csv', "wb")
-		writer = csv.writer(outfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
+		# writer = csv.writer(outfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
 		file_reader = csv.reader(csvfile, dialect)		
 		for row in file_reader:
 			print ">>>>>>>", row
-			convertRow = extractFields(row)
+			# convertRow = extractFields(row)
 			# write.writerow(covertRow)
 
 	outfile.close()
 ###
+
+########## addIssuerToClusterDict(issuerID)
+
+
+
+
+########## createDefaultEntryClusterDict()
+# Creates a ordered dictionary of 6 Violation Categories {0-5} by 12 time categories {0-11} with default value 0
+# Returns the Ordered Dictionary
+##########
+def createDefaultEntryToClusterDict():
+	entry = collections.OrderedDict()
+	for violation_category in xrange(6):
+		for time_category in xrange(12):
+			entry_key = str(violation_category) +'_'+ str(time_category)
+			# print entry_key
+			entry[entry_key]= 0
+	return entry
+########## createDefaultEntryClusterDict()
 
 ########## extractFields():
 # extractFields(row) 
@@ -96,6 +116,8 @@ def transformDate(datestring):
 
 if __name__ == '__main__':
 	convertCSV()
+	# print createDefaultEntryToClusterDict()
+	
 	# print calculateTimeFromString('0200P')
 	# row =	['1358044703', 'FPE1082', 'NY', '999', '01/02/2014', '40', 'SDN', 'ACURA', 'P', '70930', '89970', '82230', '20150612', '0073', '73', '165', '954543', '0165', '0000', '1030A', '', '', 'F', '1777', 'PITKIN AVE', '', '0', '408', 'E2', '', 'BBBBBBB', 'ALL', 'ALL', 'GOLD', '0', '2006', '-', '6', '', '', '', '', '']
 	# extractFields(row)		
