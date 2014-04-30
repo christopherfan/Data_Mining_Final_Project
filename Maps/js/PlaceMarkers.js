@@ -16,7 +16,17 @@ function initialize()
 	mapTypeId:google.maps.MapTypeId.ROADMAP
 	};
 	
+$(document).ready(function() { 
+	console.log("Ready");
+	$.getJSON( "data/json/json_geo3.json", function( data ) {
+		$.each(data, function(key, value){
+			console.log(key);
+			  $('#date_select').append('<option value='+key +'>'+key+ '</option>');
+		});
+	});
 	
+});	
+
 var pinColor = "FE7569";
 var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
         new google.maps.Size(21, 34),
@@ -25,13 +35,13 @@ var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?c
   
 var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-$('select').on('change', function() {
+$('#date_select').on('change', function() {
   // alert( this.value ); // or $(this).val()
-  printMarkers(this.value);
+  printMarkers($("#date_select").val());
 });
  
 function printMarkers(date){ 
-	$.getJSON( "js/json_geo2.json", function( data ) {
+	$.getJSON( "data/json/json_geo3.json", function( data ) {
 	  console.log(">>>>>>>>>>>>>>>>>>>>>>>", date);
 	  var date_entries = data[date]
 	  console.log(date_entries);
@@ -42,12 +52,18 @@ function printMarkers(date){
 		console.log(val['lat'], val['long']);
 		var time_violation = val['time'] + "_" + val['violation']
 		var myCenter=new google.maps.LatLng(val['lat'], val['long']);
-		var marker=new google.maps.Marker({
-			position:myCenter,
-			icon:pinImage,
-			title:time_violation
-			});
-		marker.setMap(map);
+
+		// setTimeout(function (){
+			var marker=new google.maps.Marker({
+				position:myCenter,
+				icon:pinImage,
+				title:time_violation
+				});		
+			marker.setMap(map);
+             //something you want delayed
+         // }, 100);
+		
+		
 		markersArray.push(marker);
 	  });
 	});	
