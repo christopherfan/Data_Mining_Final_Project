@@ -1,7 +1,7 @@
 import csv
 from datetime import datetime
 import collections
-
+import itertools
 
 class ClusterDictionary:
 
@@ -33,6 +33,29 @@ class ClusterDictionary:
 				# print entry_key
 				entry[entry_key]= 0
 		return entry
+########## createDefaultEntryClusterDict()
+
+########## createDefaultEntryClusterDict()
+# Creates a ordered dictionary of 6 Violation Categories {0-5} by 12 time categories {0-11} with default value 0
+# Returns the Ordered Dictionary
+##########
+	@staticmethod
+	def createDefaultEntryToClusterDictAbstract(feature_array):
+		entry = collections.OrderedDict()
+		feature_vector = ClusterDictionary.generateHeaders(feature_array)
+		for feature in feature_vector:			
+				entry_key = feature				
+				entry[entry_key]= 0
+		return entry
+		
+	@staticmethod
+	def generateHeaders(feature_array):
+		arguments_array = []
+		for item in feature_array:
+			arguments_array.append(range(1,item+1))
+		print arguments_array
+		return itertools.product(*arguments_array)
+			
 ########## createDefaultEntryClusterDict()
 
 ########## getItems(Issuer_id)
@@ -133,6 +156,8 @@ class ClusterDictionary:
 
 if __name__ == '__main__':
 	# print ClusterDictionary.createDefaultEntryToClusterDict()
-	cluster_results = ClusterDictionary()
-	cluster_results.importCSV('tim/violations_top_performers_grouped.csv')
-	cluster_results.exportCSV('ClusterData/cluster_data.csv')
+	# cluster_results = ClusterDictionary()
+	# cluster_results.importCSV('tim/violations_top_performers_grouped.csv')
+	# cluster_results.exportCSV('ClusterData/cluster_data.csv')
+	for stuff in ClusterDictionary.generateHeaders([2,3,2]):
+		print stuff

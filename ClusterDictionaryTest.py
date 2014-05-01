@@ -19,6 +19,8 @@ class ClusterDictionaryTest(unittest.TestCase):
 		self.assertEqual(self.default_entry, value)
 ########## Unit Test addDefaultEntryToClusterDict
 
+
+
 ########## Unit  addNewEntry(issuer_id)
 	def test_addNewEntry(self):
 		self.dict.addNewEntry('1234')
