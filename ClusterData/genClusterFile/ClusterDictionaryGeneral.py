@@ -6,17 +6,21 @@ import itertools
 class ClusterDictionary:
 
 	dict = {}
+	features_headers = []
+	features_param=[]
 ########## contains()
-	def __init__(self):
+	def __init__(self, features_list):
 		self.dict = {}
+		self.features_param = features_list
+		self.features_headers = ClusterDictionary.generateHeaders(features_list)
 ##########	
 	def contains(self,issuer_id):
 		return issuer_id in self.dict
 				
 
 ########## addNewEntry(issuer_id)
-	def addNewEntry(self, issuer_id):
-		default_entry = ClusterDictionary.createDefaultEntryToClusterDict()
+	def addNewEntry(self, issuer_id):	
+		default_entry = ClusterDictionary.createDefaultEntryToClusterDictAbstract(self.features_param)
 		self.dict[issuer_id] =default_entry
 ########## addNewEntry(issuer_id)
 	
@@ -42,8 +46,9 @@ class ClusterDictionary:
 	@staticmethod
 	def createDefaultEntryToClusterDictAbstract(feature_array):
 		entry = collections.OrderedDict()
-		feature_vector = ClusterDictionary.generateHeaders(feature_array)
-		for feature in feature_vector:			
+		features = ClusterDictionary.generateHeaders(feature_array)
+		
+		for feature in features:
 				entry_key = feature				
 				entry[entry_key]= 0
 		return entry
@@ -52,9 +57,16 @@ class ClusterDictionary:
 	def generateHeaders(feature_array):
 		arguments_array = []
 		for item in feature_array:
-			arguments_array.append(range(1,item+1))
-		print arguments_array
-		return itertools.product(*arguments_array)
+			arguments_array.append(item)
+		# print arguments_array
+		permutations = itertools.product(*arguments_array)
+		string_headers=[]		
+		for entry in permutations:
+			string_entry = ""
+			for index in entry:
+				string_entry += str(index) +"_"
+			string_headers.append(string_entry)
+		return string_headers
 			
 ########## createDefaultEntryClusterDict()
 
@@ -102,13 +114,14 @@ class ClusterDictionary:
 			# file_reader = csv.reader(csvfile, delimeter = ',')						
 			writer = csv.writer(outfile, delimiter=',')
 			# Create Headers
-			headers =['Issuer_id']
-			for violation_category in xrange(1,7):
-				for time_category in xrange(1,13):
-					violation_time_entry = str(violation_category) +'_'+ str(time_category)
-					# print violation_time_entry
-					headers.append(violation_time_entry)
-			# print headers
+			headers =['Issuer_id']			
+			# for violation_category in xrange(1,7):
+				# for time_category in xrange(1,13):
+					# violation_time_entry = str(violation_category) +'_'+ str(time_category)
+					# # print violation_time_entry
+					# headers.append(violation_time_entry)
+			headers+=(self.features_headers)
+			# print headers			
 			writer.writerow(headers)
 			for people in self.dict.keys():			
 				entry = []
@@ -121,13 +134,18 @@ class ClusterDictionary:
 
 ########## convertCSVRow(self, csv_input)
 	@staticmethod
-	def convertCSVRow(csv_input):
-		issuer_id = csv_input[0]
-		violation_category = csv_input[1]
-		time_category = csv_input[2]
-		violation_time = str(violation_category)+'_'+str(time_category)		
-		total = int(csv_input[3])
-		converted_row = {'issuer_id':issuer_id, 'violation_time':violation_time, 'total': total} 
+	def convertCSVRow(csv_input, numfeatures):
+		for counter in xrange(numfeatures+2):
+			if csv_input[counter] == "":
+				return False
+				
+		issuer_id = csv_input[0]		
+		features_key = ""
+		for count in xrange(1,numfeatures+1):
+			features_key +=csv_input[count] +"_"
+		key_name = features_key
+		total = int(csv_input[numfeatures+1])
+		converted_row = {'issuer_id':issuer_id, 'key':key_name, 'value': total} 						
 		return converted_row
 
 ########## convertCSVRow(self, csv_input)
@@ -141,23 +159,35 @@ class ClusterDictionary:
 			file_reader = csv.reader(csvfile, dialect)		
 			firstline = True
 			for row in file_reader:
-				if firstline:
+				if firstline:				
 					firstline = False
 					continue
-				entry = ClusterDictionary.convertCSVRow(row)
-				if(self.contains(entry['issuer_id'])):
-					self.addToIssuerItem(entry['issuer_id'], entry['violation_time'], entry['total'])
+				entry = ClusterDictionary.convertCSVRow(row, len(self.features_param))
+				
+				### Check for blanks
+				if entry == False:
+					continue		
+				### Add to Dictionary
+				if self.contains(entry['issuer_id']):					
+					self.addToIssuerItem(entry['issuer_id'], entry['key'], entry['value'])
 				else:
+					# print "New Entry: " , entry['key'], entry['value']
 					self.addNewEntry(entry['issuer_id'])
-					self.addToIssuerItem(entry['issuer_id'], entry['violation_time'], entry['total'])
+					self.addToIssuerItem(entry['issuer_id'], entry['key'], entry['value'])
 		# self.addNewEntry('301011')
 		# self.addToIssuerItem('301011', '3_10',11)
 ########## importCSV(self)
 
 if __name__ == '__main__':
 	# print ClusterDictionary.createDefaultEntryToClusterDict()
-	# cluster_results = ClusterDictionary()
-	# cluster_results.importCSV('tim/violations_top_performers_grouped.csv')
-	# cluster_results.exportCSV('ClusterData/cluster_data.csv')
-	for stuff in ClusterDictionary.generateHeaders([2,3,2]):
-		print stuff
+	dayperiod_violationcategory=[['AM','PM'], range(1,7)]
+	dayperiod_violationcode=[['AM','PM'], range(1,100)]
+	dayweek_violationcategory =[range(1,8), range(1,7)]
+	dayweek_violationcode = [range(1,8), range(1,100)]
+	typeday_violationcategory = [['Week','Weekend'], range(1,7)]
+	typeday_violationcode = [['Week','Weekend'], range(1,100)]
+	threefeaturesA = [range(1,80), ['AM','PM'], [14,38,69,21,37,20,31,16,46,40,47,19,42,71,17]]
+	threefeaturesB = [['Week','Weekend'], ['AM','PM'], [14,38,69,21,37,20,31,16,46,40,47,19,42,71,17]]
+	cluster_results = ClusterDictionary(threefeaturesB)
+	cluster_results.importCSV('csv/3featuresB_forcluster_top_performers.csv')
+	cluster_results.exportCSV('clusterfile/3featuresB_forcluster_top_performers_clusterfile.csv')
