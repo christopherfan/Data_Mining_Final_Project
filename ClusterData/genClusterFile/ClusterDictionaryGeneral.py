@@ -136,8 +136,7 @@ class ClusterDictionary:
 
 ########## convertCSVRow(self, csv_input)
 	@staticmethod
-	def convertCSVRow(csv_input, numfeatures):
-		print "????", len(csv_input)
+	def convertCSVRow(csv_input, numfeatures):		
 		for counter in xrange(numfeatures+1):
 			if csv_input[counter] == "":
 				return False
@@ -147,6 +146,7 @@ class ClusterDictionary:
 		for count in xrange(1,numfeatures+1):
 			features_key +=csv_input[count] +"_"
 		key_name = features_key
+		print "????", len(csv_input), numfeatures, csv_input
 		total = int(csv_input[numfeatures+1])
 		converted_row = {'issuer_id':issuer_id, 'key':key_name, 'value': total} 						
 		return converted_row
