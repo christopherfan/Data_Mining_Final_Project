@@ -137,7 +137,7 @@ class ClusterDictionary:
 ########## convertCSVRow(self, csv_input)
 	@staticmethod
 	def convertCSVRow(csv_input, numfeatures):
-		print csv_input
+		print "????", len(csv_input)
 		for counter in xrange(numfeatures+1):
 			if csv_input[counter] == "":
 				return False
