@@ -186,8 +186,8 @@ if __name__ == '__main__':
 	dayweek_violationcode = [range(1,8), range(1,100)]
 	typeday_violationcategory = [['Week','Weekend'], range(1,7)]
 	typeday_violationcode = [['Week','Weekend'], range(1,100)]
-	threefeaturesA = [range(1,80), ['AM','PM'], [14,38,69,21,37,20,31,16,46,40,47,19,42,71,17]]
+	threefeaturesA = [range(1,8), ['AM','PM'], [14,38,69,21,37,20,31,16,46,40,47,19,42,71,17]]
 	threefeaturesB = [['Week','Weekend'], ['AM','PM'], [14,38,69,21,37,20,31,16,46,40,47,19,42,71,17]]
-	cluster_results = ClusterDictionary(threefeaturesB)
-	cluster_results.importCSV('csv/3featuresB_forcluster_top_performers.csv')
-	cluster_results.exportCSV('clusterfile/3featuresB_forcluster_top_performers_clusterfile.csv')
+	cluster_results = ClusterDictionary(threefeaturesA)
+	cluster_results.importCSV('csv/3features_forcluster_top_performers.csv')
+	cluster_results.exportCSV('clusterfile/3features_forcluster_top_performers_clusterfile.csv')
