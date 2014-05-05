@@ -6,12 +6,15 @@ This temporary script file is located here:
 C:\Users\chrisfan\.spyder2\.temp.py
 """
 import numpy as np
+from sklearn import preprocessing
+from sklearn.externals.six import StringIO
 
 mydata = np.genfromtxt('C:\Users\chrisfan\Documents\GitHub\Data_Mining_Final_Project\Maps\data\csv\knn_sklearn_data.csv', delimiter=",")
 mytarget = np.genfromtxt('C:\Users\chrisfan\Documents\GitHub\Data_Mining_Final_Project\Maps\data\csv\knn_sklearn_target.csv', delimiter=",")
 np.random.seed(0)
 
 mydata_X = mydata
+#mydata_X = preprocessing.normalize(mydata)
 mydata_Y = mytarget
 
 indices = np.random.permutation(len(mydata_X))
@@ -59,3 +62,8 @@ for entry in xrange(len(mydata_y_test)):
         correct+=1
 print "total correct", correct, correct /float(len(mydata_y_test))
 
+from sklearn.externals.six import StringIO  
+with open("iris.dot", 'w') as f:
+    f = tree.export_graphviz(clf, out_file=f)
+import os
+os.unlink('iris.dot')    
