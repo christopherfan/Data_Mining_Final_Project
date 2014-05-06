@@ -19,11 +19,16 @@ function initialize() {
   layer_0 = new google.maps.FusionTablesLayer({
 	query: {
 	  select: "col9",
-	  from: "1rqIGtxbFqXFlq0IdeRyxmQlcAaPQd_ZdvkyYYyWb"
+	  // from: "1rqIGtxbFqXFlq0IdeRyxmQlcAaPQd_ZdvkyYYyWb"
+	  from: "1CRk1NfA8UPxXjPyST8B6UkHs17o3gtPag-qHQaeO"
 	},
 	map: map,
 	styleId: 3,
-	templateId: 5
+	templateId: 5,
+      options: {
+        styleId: 2,
+        templateId: 2
+      }	
   });
 
 	// Create the legend and display on the map
@@ -76,7 +81,7 @@ function changeMap_0() {
   layer_0.setOptions({
 	query: {
 	  select: "col9",
-	  from: "1rqIGtxbFqXFlq0IdeRyxmQlcAaPQd_ZdvkyYYyWb",
+	  from: "1CRk1NfA8UPxXjPyST8B6UkHs17o3gtPag-qHQaeO",
 	  where: whereClause
 	}
   });
