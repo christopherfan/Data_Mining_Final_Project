@@ -42,30 +42,38 @@ $('#date_select').on('change', function() {
  
 function printMarkers(date){ 
 	$.getJSON( "data/json/json_geo3.json", function( data ) {
-	  console.log(">>>>>>>>>>>>>>>>>>>>>>>", date);
-	  var date_entries = data[date]
-	  console.log(date_entries);
-	  console.log(date_entries);
-	  clearOverlays();
-	  $.each( date_entries, function( key, val ) {
-		// items.push( "<li id='" + key + "'>" + val + "</li>" );
-		console.log(val['lat'], val['long']);
-		var time_violation = val['time'] + "_" + val['violation']
-		var myCenter=new google.maps.LatLng(val['lat'], val['long']);
-
-		// setTimeout(function (){
-			var marker=new google.maps.Marker({
-				position:myCenter,
-				icon:pinImage,
-				title:time_violation
-				});		
-			marker.setMap(map);
-             //something you want delayed
-         // }, 100);
-		
-		
-		markersArray.push(marker);
-	  });
+		  var geo_array = [];
+		  console.log(">>>>>>>>>>>>>>>>>>>>>>>", date);
+		  var date_entries = data[date]
+		  console.log(date_entries);
+		  console.log(date_entries);
+		  clearOverlays();
+		  $.each( date_entries, function( key, val ) {
+			// items.push( "<li id='" + key + "'>" + val + "</li>" );
+			console.log(val['lat'], val['long']);
+			var time_violation = val['time'] + "_" + val['violation']
+			var myCenter=new google.maps.LatLng(val['lat'], val['long']);
+			
+			// setTimeout(function (){
+				var marker=new google.maps.Marker({
+					position:myCenter,
+					icon:pinImage,
+					title:time_violation
+					});		
+				// marker.setMap(map);
+				 //something you want delayed
+			 // }, 100);
+			geo_array.push(myCenter);				
+			markersArray.push(marker);
+		  });
+		var dayPath = new google.maps.Polyline({
+		path: geo_array,
+		geodesic: true,
+		strokeColor: '#FF0000',
+		strokeOpacity: 1.0,
+		strokeWeight: 2
+		});
+		dayPath.setMap(map);
 	});	
 }
 

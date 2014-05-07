@@ -3,8 +3,17 @@
         width: 100%;
       }
 
-    #map-canvas { width:800px; height:600px; }
-		.layer-wizard-search-label { font-family: sans-serif };	  
+    #map-canvas { 
+		width:800px; 
+		height:600px;
+		float:left;		}
+
+	#map_options {
+		padding-left:50px;
+		margin-left:800px;
+	}
+		
+	.layer-wizard-search-label { font-family: sans-serif };	  
 		
       #legend {
         background: #FFF;

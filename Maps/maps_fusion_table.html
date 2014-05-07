@@ -17,82 +17,77 @@
    </head>
   <body>
     <div id="map-canvas"></div>	
-    <div style="margin-top: 10px;">
-      <label class="layer-wizard-search-label">
-        Issuer Code
-        <select multiple id="search-string_issuer" >
-          <option value="--Select--">--Select--</option>
-          <option value="345221">345221</option>
-          <option value="349570">349570 </option>
-          <option value="349850">349850 </option>		  
-          <option value="350433">350433 </option>		  
-          <option value="351997">351997 </option>		  
-          <option value="354098">354098 </option>		  
-          <option value="355156">355156 </option>		  
-          <option value="355710">355710 </option>
-        </select>
-      </label> 
-    </div>	
-    <div style="margin-top: 10px;">
-	 	
-      <label class="layer-wizard-search-label">
-        From Date:
-        <input type="text" id="search-string_dateFrom">
-        <!-- <input type="button" onclick="changeMap_0()" value="Search"> -->
-        To Date:
-        <input type="text" id="search-string_dateTo">		
-      </label> 
-      
-    </div>
-    <div style="margin-top: 10px;">
+	<div id="map_options" >
 		<label class="layer-wizard-search-label">
-		Code Check boxes
-		</label>
+			Issuer Code
+		</label> 
+		<div style="margin-top: 10px;">     
+			<select multiple id="search-string_issuer" >
+			  <option value="--Select--">--Select--</option>
+			  <option value="345221">345221</option>
+			  <option value="349570">349570 </option>
+			  <option value="349850">349850 </option>		  
+			  <option value="350433">350433 </option>		  
+			  <option value="351997">351997 </option>		  
+			  <option value="354098">354098 </option>		  
+			  <option value="355156">355156 </option>		  
+			  <option value="355710">355710 </option>
+			</select>      
+		</div>	
+		<div style="margin-top: 10px;">	 	
+		  <label class="layer-wizard-search-label">
+			From Date:
+			<input type="text" id="search-string_dateFrom">
+			<!-- <input type="button" onclick="changeMap_0()" value="Search"> -->
+			To Date:
+			<input type="text" id="search-string_dateTo">		
+		  </label>       
+		</div>
+		<div style="margin-top: 10px;">
+			<label class="layer-wizard-search-label">
+			Violation Code
+			</label>
+		</div>
+		<div id="code_select" style="margin-top: 10px;">
+		  <label class="layer-wizard-search-label">        
+			<select multiple id="search_violation_code" >
+			  <option value="--Select--" selected="selected">--Select--</option>
+			  <option value="14">14:General No Standing</option>
+			  <option value="16">16:Truck Loading/Unloading</option>
+			  <option value="20">20:General No Parking</option>
+			  <option value="21">21:Street Cleaning</option>
+			  <option value="31">31:Non-com vehicle stand in com</option>
+			  <option value="37">37:Park Over Time</option>
+			  <option value="38">38:Failing show Park Tag</option>
+			  <option value="10">10</option>
+			  <option value="13">13</option>
+			  <option value="17">17</option>
+			  <option value="19">19</option>
+			  <option value="24">24</option>
+			  <option value="35">35</option>
+			  <option value="39">39</option>
+			  <option value="40">40</option>
+			  <option value="42">42</option>
+			  <option value="46">46</option>
+			  <option value="48">48</option>
+			  <option value="51">51</option>
+			  <option value="53">53</option>
+			  <option value="67">67</option>
+			  <option value="68">68</option>
+			  <option value="69">69</option>
+			  <option value="70">70</option>
+			  <option value="71">71</option>
+			  <option value="74">74</option>
+			  <option value="75">75</option>
+			  <option value="77">77</option>
+			  <option value="82">82</option>
+			  <option value="84">84</option>
+			</select>
+		  </label> 
+		</div>
+		<div style="margin-top: 10px;">
+			<button type="button" onclick="changeMap_0()">Click Me!</button>
+		</div>	
 	</div>
-    <div id="code_select" style="margin-top: 10px;">
-      <label class="layer-wizard-search-label">
-        Code
-        <select multiple id="search_violation_code" >
-          <option value="--Select--" selected="selected">--Select--</option>
-          <option value="14">14:General No Standing</option>
-          <option value="16">16:Truck Loading/Unloading</option>
-          <option value="20">20:General No Parking</option>
-		  <option value="21">21:Street Cleaning</option>
-          <option value="31">31:Non-com vehicle stand in com</option>
-          <option value="37">37:Park Over Time</option>
-          <option value="38">38:Failing show Park Tag</option>
-
-          <option value="10">10</option>
-          <option value="13">13</option>
-
-          <option value="17">17</option>
-          <option value="19">19</option>
-
-          <option value="24">24</option>
-
-          <option value="35">35</option>
-          <option value="39">39</option>
-          <option value="40">40</option>
-          <option value="42">42</option>
-          <option value="46">46</option>
-          <option value="48">48</option>
-          <option value="51">51</option>
-          <option value="53">53</option>
-          <option value="67">67</option>
-          <option value="68">68</option>
-          <option value="69">69</option>
-          <option value="70">70</option>
-          <option value="71">71</option>
-          <option value="74">74</option>
-          <option value="75">75</option>
-          <option value="77">77</option>
-          <option value="82">82</option>
-          <option value="84">84</option>
-        </select>
-      </label> 
-    </div>
-	<div style="margin-top: 10px;">
-		<button type="button" onclick="changeMap_0()">Click Me!</button>
-	</div>	
   </body>
 </html>
