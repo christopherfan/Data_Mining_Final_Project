@@ -19,11 +19,16 @@ function initialize() {
   layer_0 = new google.maps.FusionTablesLayer({
 	query: {
 	  select: "col9",
-	  from: "1rqIGtxbFqXFlq0IdeRyxmQlcAaPQd_ZdvkyYYyWb"
+	  // from: "1rqIGtxbFqXFlq0IdeRyxmQlcAaPQd_ZdvkyYYyWb"
+	  from: "1CRk1NfA8UPxXjPyST8B6UkHs17o3gtPag-qHQaeO"
 	},
 	map: map,
 	styleId: 3,
-	templateId: 5
+	templateId: 5,
+      options: {
+        styleId: 2,
+        templateId: 2
+      }	
   });
 
 	// Create the legend and display on the map
@@ -52,6 +57,7 @@ function changeMap_0() {
 	whereClause = whereClause +" AND 'issue_date' <= '" + searchString_dateTo + "'";
   }
 
+  //Extract Violation Codes
   if (searchString_code != '--Select--') {
 	var searchCode_array = $("#search_violation_code ").val()
 	var searchCode_string = "'" + searchCode_array[0] + "'";
@@ -66,9 +72,24 @@ function changeMap_0() {
 	// whereClause = whereClause  + " AND 'violation_code'='" + searchString_code + "'";
   }  
 
+  // Extract Issuer
   if (searchString_issuer != '--Select--') {
-	whereClause = whereClause  +" AND 'issuer_code'='" + searchString_issuer + "'";
-  }    
+	var searchIssuer_array = $("#search-string_issuer").val()
+	var searchIssuer_string = "'" + searchIssuer_array[0] + "'";
+	if( searchIssuer_array.length >1){
+		$.each(searchIssuer_array.slice(1,searchIssuer_array.length), function(key, value){			
+			searchIssuer_string +=  ",'"+ value + "'";
+			console.log("Adding Code String", searchIssuer_string );
+		});
+	}
+	console.log("Code String", searchIssuer_string );
+	whereClause = whereClause   + " AND " + "'issuer_code' IN (" +searchIssuer_string+ " )";
+	// whereClause = whereClause  + " AND 'violation_code'='" + searchString_code + "'";
+  }  
+
+  // if (searchString_issuer != '--Select--') {
+	// whereClause = whereClause  +" AND 'issuer_code'='" + searchString_issuer + "'";
+  // }    
   
   
   /* Make Google Fusion API Query */
@@ -76,7 +97,7 @@ function changeMap_0() {
   layer_0.setOptions({
 	query: {
 	  select: "col9",
-	  from: "1rqIGtxbFqXFlq0IdeRyxmQlcAaPQd_ZdvkyYYyWb",
+	  from: "1CRk1NfA8UPxXjPyST8B6UkHs17o3gtPag-qHQaeO",
 	  where: whereClause
 	}
   });

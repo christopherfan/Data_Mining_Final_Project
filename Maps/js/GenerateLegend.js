@@ -8,27 +8,27 @@
       // The min / max values for each bucket and the associated color.
       var styles = [
         {
-          'min': '6-9',
+          'min': 'Before 6',
           // 'max': 1,
           'color': 'yellow'
         },
         {
-          'min': '9-Noon',
+          'min': '6-9',
           'max': 2,
           'color': 'purple'
         },
         {
-          'min': 'Noon-3',
+          'min': '9-Noon',
           'max': 2,
           'color': 'green'
         },
         {
-          'min': '3-6',
+          'min': 'Noon-3',
           'max': 79999,
           'color': 'blue'
         },
 		 {
-          'min': '6-',
+          'min': '3-6',
           'max': 89999,
           'color': 'red'
         }

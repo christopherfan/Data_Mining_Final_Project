@@ -2,13 +2,14 @@
 <html>
   <head>
   <link rel="stylesheet" type="text/css" href="css/maps_style.css">
-  <link href="https://developers.google.com/fusiontables/docs/samples/style/default.css"
-        rel="stylesheet" type="text/css">  
+<!--   <link href="https://developers.google.com/fusiontables/docs/samples/style/default.css"
+        rel="stylesheet" type="text/css">   -->
   <script type="text/javascript"
     src="http://maps.google.com/maps/api/js?sensor=false">
   </script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script type="text/javascript"
-    src="js/FusionMap.js">
+    src="js/FusionMap_Cluster1.js">
   </script>  
     <script type="text/javascript"
     src="js/GenerateLegend.js">
@@ -19,10 +20,16 @@
     <div style="margin-top: 10px;">
       <label class="layer-wizard-search-label">
         Issuer Code
-        <select id="search-string_issuer" >
+        <select multiple id="search-string_issuer" >
           <option value="--Select--">--Select--</option>
-          <option value="353164">353164</option>
+          <option value="345221">345221</option>
           <option value="349570">349570 </option>
+          <option value="349850">349850 </option>		  
+          <option value="350433">350433 </option>		  
+          <option value="351997">351997 </option>		  
+          <option value="354098">354098 </option>		  
+          <option value="355156">355156 </option>		  
+          <option value="355710">355710 </option>
         </select>
       </label> 
     </div>	
@@ -38,10 +45,15 @@
       
     </div>
     <div style="margin-top: 10px;">
+		<label class="layer-wizard-search-label">
+		Code Check boxes
+		</label>
+	</div>
+    <div id="code_select" style="margin-top: 10px;">
       <label class="layer-wizard-search-label">
         Code
-        <select id="search-string_1" >
-          <option value="--Select--">--Select--</option>
+        <select multiple id="search_violation_code" >
+          <option value="--Select--" selected="selected">--Select--</option>
           <option value="14">14:General No Standing</option>
           <option value="16">16:Truck Loading/Unloading</option>
           <option value="20">20:General No Parking</option>
