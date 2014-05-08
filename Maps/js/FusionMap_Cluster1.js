@@ -38,6 +38,10 @@ function initialize() {
 	legend.index = 1;
 	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);  
   
+    $(function() {
+		$( "#search-string_dateFrom" ).datepicker();
+		$( "#search-string_dateTo" ).datepicker();
+	});
 }
 /** 
 	Change Map Forms Fusion API Query and makes request to Google Maps API

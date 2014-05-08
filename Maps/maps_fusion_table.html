@@ -1,93 +1,188 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <link rel="stylesheet" type="text/css" href="css/maps_style.css">
-<!--   <link href="https://developers.google.com/fusiontables/docs/samples/style/default.css"
-        rel="stylesheet" type="text/css">   -->
-  <script type="text/javascript"
-    src="http://maps.google.com/maps/api/js?sensor=false">
-  </script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script type="text/javascript"
-    src="js/FusionMap_Cluster1.js">
-  </script>  
-    <script type="text/javascript"
-    src="js/GenerateLegend.js">
-  </script>  
+	  <link rel="stylesheet" type="text/css" href="css/maps_style.css">
+	<!--   <link href="https://developers.google.com/fusiontables/docs/samples/style/default.css"
+			rel="stylesheet" type="text/css">   -->
+	  <script type="text/javascript"
+		src="http://maps.google.com/maps/api/js?sensor=false">
+	  </script>
+	  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	  <script type="text/javascript"
+		src="js/FusionMap_Cluster1.js">
+	  </script>  
+		<script type="text/javascript"
+		src="js/GenerateLegend.js">
+	  </script>  
+	  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
    </head>
   <body>
-    <div id="map-canvas"></div>	
-	<div id="map_options" >
-		<label class="layer-wizard-search-label">
-			Issuer Code
-		</label> 
-		<div style="margin-top: 10px;">     
-			<select multiple id="search-string_issuer" >
-			  <option value="--Select--">--Select--</option>
-			  <option value="345221">345221</option>
-			  <option value="349570">349570 </option>
-			  <option value="349850">349850 </option>		  
-			  <option value="350433">350433 </option>		  
-			  <option value="351997">351997 </option>		  
-			  <option value="354098">354098 </option>		  
-			  <option value="355156">355156 </option>		  
-			  <option value="355710">355710 </option>
-			</select>      
-		</div>	
-		<div style="margin-top: 10px;">	 	
+	<div class="row">
+		<div class= "col-lg-8" id="map-canvas"></div>	
+		<div class = "col-lg-4"  >
+
+		
+<!-- 			<div class="row">
+				<div class="col-xs-1 ">
+					<label class="layer-wizard-search-label">
+						1:Cleaner
+					</label> 
+					<div style="margin-top: 10px;">     
+						<select multiple id="search-string_issuer1" >
+						  <option value="--Select--"  selected="selected">--Select--</option>
+						  <option value="345221">345221</option>
+						  <option value="349570">349570 </option>
+						  <option value="349850">349850 </option>		  
+						  <option value="350433">350433 </option>		  
+						  <option value="351997">351997 </option>		  
+						  <option value="354098">354098 </option>		  
+						  <option value="355156">355156 </option>		  
+						  <option value="355710">355710 </option>
+						</select>      
+					</div>	
+				</div>
+				<div class="col-xs-1 col-xs-offset-1">						
+					<label class="layer-wizard-search-label">
+						2:Curbside
+					</label> 
+					<div style="margin-top: 10px;">     
+						<select multiple id="search-string_issuer1" >
+						  <option value="--Select--"  selected="selected">--Select--</option>
+						  <option value="358600">358600</option>						  
+						  <option value="355567">355567 </option>
+						  <option value="354084">354084 </option>		  
+						  <option value="353164">353164 </option>		  
+						  <option value="351929">351929 </option>		  						  
+						</select>      
+					</div>				
+				</div>
+				<div class="col-xs-3 col-xs-offset-1">						
+					<label class="layer-wizard-search-label">
+						3:Early-Bird
+					</label> 
+					<div style="margin-top: 10px;">     
+						<select multiple id="search-string_issuer1" >
+						  <option value="--Select--"  selected="selected">--Select--</option>
+						  <option value="356261">356261</option>
+						  <option value="353424">353424 </option>  
+						</select>      
+					</div>				
+				</div>
+				<div class="col-xs-2 col-xs-offset-1 ">						
+					<label class="layer-wizard-search-label">
+						4:The Shield
+					</label> 
+					<div style="margin-top: 10px;">     
+						<select multiple id="search-string_issuer1" >
+						  <option value="--Select--"  selected="selected">--Select--</option>
+						  <option value="358570">358570</option>
+						  <option value="357724">357724 </option>
+						</select>      
+					</div>				
+				</div>				
+				<div class="col-xs-1 col-xs-offset-1 ">						
+					<label class="layer-wizard-search-label">
+						5:Mafios
+					</label> 
+					<div style="margin-top: 10px;">     
+						<select multiple id="search-string_issuer1" >
+						  <option value="--Select--"  selected="selected">--Select--</option>
+						  <option value="330692">330692</option>
+						  <option value="346330">346330 </option>
+						</select>      
+					</div>				
+				</div>							
+			</div> -->			
+			<div style="margin-top: 10px;">	 	
 		  <label class="layer-wizard-search-label">
 			From Date:
-			<input type="text" id="search-string_dateFrom">
+			<input type="text" id="search-string_dateFrom" value="09/01/2013">
 			<!-- <input type="button" onclick="changeMap_0()" value="Search"> -->
 			To Date:
-			<input type="text" id="search-string_dateTo">		
+			<input type="text" id="search-string_dateTo" value="09/30/2013">		
 		  </label>       
 		</div>
-		<div style="margin-top: 10px;">
-			<label class="layer-wizard-search-label">
-			Violation Code
-			</label>
+
+			<div class="row">
+				<div class="col-md-2 ">
+					<div style="margin-top: 10px;">
+						<label class="layer-wizard-search-label">
+							Cluster
+						</label> 
+						<div style="margin-top: 10px;">     
+							<select multiple id="search-string_issuer" size ="7" >
+							  <option value="--Select--"  selected="selected">--Select All--</option>
+							  <option value="345221">Cleaner</option>
+							  <option value="350433">Cleaner2</option>							  							  
+							  <option value="354084">Curbside</option>						  
+							  <option value="356261">Early Bird</option>									  
+							  <option value="358570">Shield</option>	
+							  <option value="346330">Mafios </option>
+							  <option value="349570">Cleaner3</option>
+							  <option value="349850">Cleaner4</option>							  
+
+							</select>      
+						</div>	
+					</div>
+				</div>
+				<div class="col-md-4 col-md-offset-1">
+					<div style="margin-top: 10px;">
+						<label class="layer-wizard-search-label">
+						Violation Code
+						</label>
+						<div id="code_select" style="margin-top: 10px;">
+						  <label class="layer-wizard-search-label">        
+							<select multiple id="search_violation_code" size ="14">
+							  <option value="--Select--" selected="selected">--Select All--</option>
+							  <option style="padding-left: 20px" value="21">	21:Street Cleaning</option>							   
+							    <optgroup label="Standing">
+									<option value="14">	14:General No Standing</option>
+									<option value="20">	20:General No Parking</option>
+									<option value="13">13:Taxi Stand</option>
+									<option value="17">17:Authorized Vehicles Only</option>
+							  </optgroup>
+							    <optgroup label="Meter Violation">
+							  <option value="37">	37:Park Over Time</option>
+							  <option value="38">38:Failing show Park Tag</option>
+							  </optgroup>
+							    <optgroup label="Commercial Violation">
+							  <option value="16">16:Truck Loading/Unloading</option>
+							  <option value="31">31:Non-com vehicle stand in com</option>
+							  <option value="69">69:Commercial Meter</option>							  
+							  </optgroup>
+							  <option value="10">10:Stopping, standing</option>
+							  <option value="19">19:Bus Stop</option>
+							  <option value="24">24:Authorized Vehicle Parking</option>
+							  <option value="35">35: Parking Meter Commerical Use</option>
+							  <option value="39">39: Parking Exceed Sign Time</option>
+							  <option value="40">40: Fire Hydrant</option>
+							  <option value="42">42:Parking in a Muni Metered </option>
+							  <option value="46">46: double parking</option>
+							  <option value="48">48: Stand Bike Lane</option>
+							  <option value="51">51:Car on Sidewalkd</option>
+							  <option value="53">53: Safety Zone Violation</option>
+							  <option value="67">67: Pedestrian Ramp</option>
+							  <option value="68">68: No Parking Sign</option>
+							  <option value="70">70: No Registration</option>
+							  <option value="71">71:Inspection Sticker</option>
+							  <option value="74">74:No Plate</option>
+							  <option value="75">75:Plate Mismatch</option>
+							  <option value="77">77:Parking Bus Violation</option>
+<!-- 							  <option value="82">82</option>
+							  <option value="84">84</option> -->
+							</select>
+						  </label> 
+						</div>	
+					</div>
+				</div>
+			</div>		
+
+			<div style="margin-top: 10px;">
+			<button type="button" onclick="changeMap_0()">Show Tickets</button>
+			</div>				
 		</div>
-		<div id="code_select" style="margin-top: 10px;">
-		  <label class="layer-wizard-search-label">        
-			<select multiple id="search_violation_code" >
-			  <option value="--Select--" selected="selected">--Select--</option>
-			  <option value="14">14:General No Standing</option>
-			  <option value="16">16:Truck Loading/Unloading</option>
-			  <option value="20">20:General No Parking</option>
-			  <option value="21">21:Street Cleaning</option>
-			  <option value="31">31:Non-com vehicle stand in com</option>
-			  <option value="37">37:Park Over Time</option>
-			  <option value="38">38:Failing show Park Tag</option>
-			  <option value="10">10</option>
-			  <option value="13">13</option>
-			  <option value="17">17</option>
-			  <option value="19">19</option>
-			  <option value="24">24</option>
-			  <option value="35">35</option>
-			  <option value="39">39</option>
-			  <option value="40">40</option>
-			  <option value="42">42</option>
-			  <option value="46">46</option>
-			  <option value="48">48</option>
-			  <option value="51">51</option>
-			  <option value="53">53</option>
-			  <option value="67">67</option>
-			  <option value="68">68</option>
-			  <option value="69">69</option>
-			  <option value="70">70</option>
-			  <option value="71">71</option>
-			  <option value="74">74</option>
-			  <option value="75">75</option>
-			  <option value="77">77</option>
-			  <option value="82">82</option>
-			  <option value="84">84</option>
-			</select>
-		  </label> 
-		</div>
-		<div style="margin-top: 10px;">
-			<button type="button" onclick="changeMap_0()">Click Me!</button>
-		</div>	
 	</div>
   </body>
 </html>
