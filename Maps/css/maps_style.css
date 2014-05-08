@@ -12,6 +12,10 @@
 		padding-left:50px;
 		margin-left:800px;
 	}
+	
+	.option_indent{
+		padding-left: 20px;
+	}
 		
 	.layer-wizard-search-label { font-family: sans-serif };	  
 		
